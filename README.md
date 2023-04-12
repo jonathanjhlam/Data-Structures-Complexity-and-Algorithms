@@ -242,3 +242,441 @@ array = list(range(1,10000))
 palindromic_numbers = list(map(int, filter(isPalindrome, map(str, array))))
 print('Palindromic Numbers from 1 to 10,000', palindromicNumbers)
 ```
+**Explanation:**
+- Function Composition Breakdown
+  - 1. string version of the array --> map(str, array)
+  - 2. filter out the palindrome --> filter(isPalindrome, string version of the array)
+  - 3. remap all values back to integers --> map(int, palindromes)
+  - 4. turn the mapped integers iterable back inside a list --> list(palindromicIterables)
+```
+How it would looked with multiple defined variables:
+
+array = list(range(1,10000))
+str_array = map(str, array)
+palindromes = filter(isPalindrome, str_array)
+palindromics = map(int, palindromes)
+
+palindromic_numbers = list(palindromes)
+```
+- **Composition of Functions:** Composition of Functions is the idea of using functions within a function call or apply one function to the result of another function.
+
+# Lesson 3: Tuples
+## Tuples in Python 3
+
+### What are Tuples?
+- Strings and Lists are basic iterable data types that are very similar with key differences:
+  - Strings only allow alphanumeric characters and special symbols to represent text
+  - Lists allow all data types as its items/members
+  - Strings are immutable whereas Lists are mutable
+- These significant differences cause a headache when you require the following data structure:
+  - It must be immutable
+  - It must allow different datatypes as items
+  - It must be iterable
+  - It must be nestable 
+    - like a list within a list
+- **All of these are solved** with a data structure called: **Tuple**
+
+### How to use Tuples in Python 3
+- Tuples are declared with parenthesis -> ()
+- () is an empty tuple
+- (50,) is a singleton tuple; the comma is required
+- Tuples are sliceable; therefore, indexable using square brackets
+- A singleton is an iterable data structure with only single item
+
+### Tuple Example 1
+```
+tup = ('C', ' Java', 'Python')
+empty_tup = ()
+single_tup = ('Park',)
+
+print(tup)
+print(empty_tup)
+print(single_tup)
+```
+```
+('C', ' Java', 'Python')
+()
+('Park',)
+```
+
+### Tuple Operators
+```
+# Concatenation: Joining two tuples
+a = (1,2,3)
+b = (4,5,6)
+concat_result = a + b
+print('a+b:', concat_result)
+
+
+# Repetition: Repeating a list multiple times
+c = ('Hi!',)
+repet_result = c * 3
+print('c*3', repet_result)
+
+# Membership: Check if a value exists in a tuple
+d = a + b + c
+print('d:', d)
+print('\'Hi!\' in d:', 'Hi!' in d)
+print('7 in d:', 7 in d)
+```
+```
+a+b: (1, 2, 3, 4, 5, 6)
+c*3 ('Hi!', 'Hi!', 'Hi!')
+d: (1, 2, 3, 4, 5, 6, 'Hi!')
+'Hi!' in d: True
+7 in d: False
+```
+
+### Tuples are Iterable, Indexable, and Sliceable
+```
+# Iteration
+example = ('C', 'Java', 'Python', 'C#', 'JavaScript')
+
+print('Tuple example items:')
+for language in example:
+    print(language)
+print('--')
+
+# Indexing
+print('Index 1:', example[1])
+print('Last Value:', example[-1])
+
+# Slicing
+print('Backwards:', example[::-1])
+print('Every other:', example[::2])
+print('From 1 to end:', example[1:])
+print('From 1 to 3:', example[1:3])
+```
+```
+Tuple example items:
+C
+Java
+Python
+C#
+JavaScript
+--
+Index 1: Java
+Last Value: JavaScript
+Backwards: ('JavaScript', 'C#', 'Python', 'Java', 'C')
+Every other: ('C', 'Python', 'JavaScript')
+From 1 to end: ('Java', 'Python', 'C#', 'JavaScript')
+From 1 to 3: ('Java', 'Python')
+```
+
+### Built-in Functions with Tuple
+```
+example = ('C', 'Java', 'Python', 'C#', 'JavaScript')
+
+print('Length:', len(example))
+print('Minimum value:', min(example))
+print('Maximum value:', max(example))
+print('--')
+
+word = 'Hello'
+array = [1,2,3,4]
+array_array = [[1],[2,3],[4]]
+
+print('String to Tuple:', tuple(word))
+print('List to Tuple:', tuple(array))
+print('2D array to Tuple:', tuple(array_array))
+print('--')
+
+array_array[0][0] = 'p'
+print(array_array)
+
+# Note: don't have mutable data type as items in a tuple ...
+```
+```
+Length: 5
+Minimum value: C
+Maximum value: Python
+--
+String to Tuple: ('H', 'e', 'l', 'l', 'o')
+List to Tuple: (1, 2, 3, 4)
+2D array to Tuple: ([1], [2, 3], [4])
+--
+[['p'], [2, 3], [4]]
+```
+
+### Tuple Comprehension
+```
+# Tuple of Even values from 1 to 100
+even_tup = tuple(i for i in range(1,101) if i % 2 == 0)
+
+print(even_tup)
+```
+- The parentheses were taken for a different functionality in python; therefore, we have to do comprehension like this
+- The general format is the exactly the same as list comprehension
+
+### Tuple & Python: Packing and Unpacking
+```
+# Examine the following code
+
+# Packing
+var_1 = 2
+var_2 = 3
+var_3 = 5
+
+prime = var_1, var_2, var_3
+
+print('Packed prime values:', prime)
+
+# Unpacking and Repacking
+fib = (0, 1, 1, 2, 3, 5, 8)
+
+fib_0, fib_1, fib_n = fib[0], fib[1], fib[2:]
+print('fib_0:', fib_0)
+print('fib_1:', fib_1)
+print('fib_n:', fib_n)
+```
+```
+Packed prime values: (2, 3, 5)
+fib_0: 0
+fib_1: 1
+fib_n: (1, 2, 3, 5, 8)
+```
+**Explanation:**
+- Packing collect multiple variable’s values and assign it to a single variable
+- Unpacking help us assign certain values from a tuple to different variables
+- This becomes very useful skill when combined with variable arguments for Function Definition and Function Calls
+
+# Lesson 4: Sets
+## Sets in Python 3
+- A set is an unordered collection with no duplicate elements in Python 3
+- Set is a mathematical way to describe collection of different unique objects
+- By following the operations and characteristics of the mathematical set, we can utilizie such data structure in our Python code
+
+### Using Sets in Python 3
+#### How to Define a Set
+```
+# Set definition examples:
+example_set1 = {1, 2, 3}
+example_set2 = {'h','e','l','l','o'}
+
+print('example_set1:', example_set1)
+print('example_set2:', example_set2) # Notice there is only 1 'l'; Also notice the order of the values outputted
+print('--')
+
+singleton_set = {7}
+empty_set = set() # this is because {} is reversed for a different feature in python 3.
+
+print('Singleton:', singleton_set)
+print('Empty Set:', empty_set)
+```
+```
+example_set1: {1, 2, 3}
+example_set2: {'o', 'e', 'h', 'l'}
+--
+Singleton: {7}
+Empty Set: set()
+```
+#### Basic Built-in Functions w/ Sets
+```
+# Basic Built-in Functions w/ Sets
+
+example_set = set('hello') # set() turns an iterable into a set
+print('example_set:', example_set)
+print('--')
+
+print('Number of Values:', len(example_set)) # length function
+print('Minimum Value:', min(example_set)) # min function
+print('Maximum Value:', max(example_set)) # max function
+print('--')
+
+# tuple to set
+tup = (2,3,5,7)
+print('tup to set:', set(tup))
+
+# list to set
+array = ['orange']*2 +  ['watermelon', 'apple'] + ['kiwi'] * 10
+print('Original Array:', array)
+print('list to set:', set(array))
+```
+```
+example_set: {'o', 'e', 'h', 'l'}
+--
+Number of Values: 4
+Minimum Value: e
+Maximum Value: o
+--
+tup to set: {2, 3, 5, 7}
+Original Array: ['orange', 'orange', 'watermelon', 'apple', 'kiwi', 'kiwi', 'kiwi', 'kiwi', 'kiwi', 'kiwi', 'kiwi', 'kiwi', 'kiwi', 'kiwi']
+list to set: {'watermelon', 'orange', 'apple', 'kiwi'}
+```
+#### Basic Membership Operators
+- Membership is one of the key operations with set because:
+  - A set has no duplicates
+  - A set’s membership operation is one of the fastest operations compared to strings, lists, or tuples this will be covered more when we look at the concept of: complexity
+  - By using membership operator, we can be certain a target exists or does not exist in our data
+```
+# Membership Example
+example_set = set('hello')
+
+print("Membership of: \'h\'", 'h' in example_set)
+print("Non-Membership of: \'z\'", 'z' not in example_set)
+```
+```
+Membership of: 'h' True
+Non-Membership of: 'z' True
+```
+
+#### Accessing Values in a Set
+- Due to its unordered nature of a set, there is no concept of indexing or slicing with a set
+  - However it is iterable
+```
+# Iteration of a Set
+example_set = {2,3,5,7,11,13}
+
+for v in example_set:
+    print('Values of example_set:', v)
+```
+```
+Values of example_set: 2
+Values of example_set: 3
+Values of example_set: 5
+Values of example_set: 7
+Values of example_set: 11
+Values of example_set: 13
+```
+
+#### Python 3 Sets are mutable: Adding and Removing Values
+- Sets are mutable -> can add and remove values
+- There are also methods much lists that can affect the original sets as well
+```
+# Adding and Removing Values
+languages = set() # empty set initialization
+
+programming_languages = ['C', 'C#', 'Java', 'Python', 'HTML', 'CSS', 'JavaScript', 'Haskell']
+
+for item in programming_languages:
+    languages.add(item) # .add() method adds an item to a set
+
+print('Languages set:', languages)
+print('--')
+
+languages.discard('HTML') # looks for the target value, if found, it will remove from the set
+print('HTML deleted:', languages)
+
+languages.remove('CSS') # remove can be used to delete a value;
+# only difference is it will raise an error if the target is not found
+print('CSS deleted:', languages)
+
+random_remove = languages.pop() # .pop() method deletes a random value and return the value ... not recommended
+print('Randomly Removed value:', random_remove)
+
+languages.clear() # .clear() will empty out a set : output is set()
+print('Empty languages:', languages)
+```
+```
+Languages set: {'HTML', 'CSS', 'JavaScript', 'Python', 'Haskell', 'Java', 'C', 'C#'}
+--
+HTML deleted: {'CSS', 'JavaScript', 'Python', 'Haskell', 'Java', 'C', 'C#'}
+CSS deleted: {'JavaScript', 'Python', 'Haskell', 'Java', 'C', 'C#'}
+Randomly Removed value: JavaScript
+Empty languages: set()
+```
+
+### Powering Up Sets: Set Operators
+- Much like its mathematical counterpart, sets in Python 3 can utilize its vast operators to help us do complex calculations
+  - Most of these operators will have a method counterpart because sets are mutable
+- Note: We will be showcasing these operators with set of strings to make it easier, but this can be easily done with any kinds of sets
+#### Our Operators
+- Union 
+- Intersection
+- Difference
+- Symmetric Difference
+- Proper Subset
+- Subset
+- Proper Superset
+- Superset
+
+**Union:** The joining/combining of two sets
+```
+# Union Example:
+set1 = set('hello')
+set2 = set('world')
+
+result = set1 | set2 # | is the union operator ... all the members of both set are combined to a single set
+# Recall that: there are no duplicates
+print('set1 union set 2:', result)
+```
+```
+set1 union set 2: {'h', 'w', 'e', 'r', 'l', 'd', 'o'}
+```
+**Intersection:** Members/Items that only exists in both sets
+```
+# Union Example:
+set1 = set('hello')
+set2 = set('world')
+
+result = set1 & set2 # & is the intersection operator
+print('Intersection of set1 and set2:', result)
+```
+```
+Intersection of set1 and set2: {'o', 'l'}
+```
+**Difference:** Members/items that only exists in the first set and not the second set
+```
+# Difference Example:
+set1 = set('hello')
+set2 = set('world')
+
+result1 = set1 - set2 # - is the difference operator ... this is set1 difference set2
+result2 = set2 - set1 # set2 difference set1
+
+print('set1 - set2:', result1)
+print('set2 - set1:', result2)
+```
+```
+set1 - set2: {'e', 'h'}
+set2 - set1: {'w', 'd', 'r'}
+```
+**Symmetric Difference:** Members/items that exists one or the other set, but not both sets
+```
+# Symmetric Difference Example:
+set1 = set('hello')
+set2 = set('world')
+
+result = set1 ^ set2 # ^ is the symmetric difference operator
+
+print('Symmetric Difference of:', result)
+```
+```
+Symmetric Difference of: {'e', 'h', 'w', 'd', 'r'}
+```
+**Proper Subset:** This is a boolean operator
+- A is proper subset of B if all members of A is found in B, but A cannot be exactly the same as B
+```
+# Proper Subset Example:
+set1 = {1,2,3}
+set2 = {1,2,3,4}
+set3 = {1,2,3}
+set4 = set('hello')
+
+print('Is set1 proper subset of set2?:', set1 < set2) # < is the proper subset operator
+print('Is set1 proper subset of set3?:', set1 < set3)
+print('Is set1 proper subset of set4?:', set1 < set4)
+```
+```
+Is set1 proper subset of set2?: True
+Is set1 proper subset of set3?: False
+Is set1 proper subset of set4?: False
+```
+**Subset:** This is a boolean operator
+- A is a Proper Subset of B if A < B is True, but A can equal to B unlike a proper subset
+```
+# Subset Example:
+set1 = {1,2,3}
+set2 = {1,2,3,4}
+set3 = {1,2,3}
+set4 = set('hello')
+
+print('Is set1 a subset of set2?:', set1 <= set2) # <= is the subset operator
+print('Is set1 a subset of set3?:', set1 <= set3) # Notice the difference in value here
+print('Is set1 a subset of set4?:', set1 <= set4)
+```
+```
+Is set1 a subset of set2?: True
+Is set1 a subset of set3?: True
+Is set1 a subset of set4?: False
+```
