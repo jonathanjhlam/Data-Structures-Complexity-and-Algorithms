@@ -680,3 +680,537 @@ Is set1 a subset of set2?: True
 Is set1 a subset of set3?: True
 Is set1 a subset of set4?: False
 ```
+**Proper Superset:** This is a boolean operator
+- A is a proper superset of B if A has all the values of B and more, but they are not equal to each other
+```
+# Superset Example:
+set1 = {1,2,3,4}
+set2 = {1,2,3,4}
+set3 = {1,2,3}
+set4 = set('hello')
+
+print('Is set1 proper superset of set2?:', set1 > set2) # > is the proper superset operator
+print('Is set1 proper superset of set3?:', set1 > set3)
+print('Is set1 proper superset of set4?:', set1 > set4)
+```
+```
+Is set1 proper superset of set2?: False
+Is set1 proper superset of set3?: True
+Is set1 proper superset of set4?: False
+```
+**Superset:** This is a boolean operator
+- A is a superset of B if A > B or A == B
+```
+# Superset Example:
+set1 = {1,2,3,4}
+set2 = {1,2,3,4}
+set3 = {1,2,3}
+set4 = set('hello')
+
+print('Is set1 superset of set2?:', set1 >= set2) # >= is the proper superset operator
+print('Is set1 superset of set3?:', set1 >= set3)
+print('Is set1 superset of set4?:', set1 >= set4)
+```
+```
+Is set1 superset of set2?: True
+Is set1 superset of set3?: True
+Is set1 superset of set4?: False
+```
+### Disjoint: A Set Behaviour Property
+- Two set are consided disjointed when two sets share no common value
+  - Let A and B both represent a set
+  - If A & B is empty, then set A and B are considered disjointed
+  - To check this in python there is a method called: isdisjoint()
+- Recall: & is the intersection operator
+```
+# Disjoint Example
+# .isdisjoint() is a set method to check for such property between two sets.
+
+set1 = {1,2,3,4}
+set2 = {5,6,7}
+set3 = {1,2,3,4,5}
+
+print('set1 intersect set2:', set1 & set2) # Output is an empty set
+print('set1 intersect set3:', set1 & set3) # Output is an non-empty set
+print('--')
+print('set 1 disjoint set 2 check:', set1.isdisjoint(set2)) # Therefore .isdisjoint() evaluates to True
+print('set 1 disjoint set 3 check:', set2.isdisjoint(set3))
+```
+```
+set1 intersect set2: set()
+set1 intersect set3: {1, 2, 3, 4}
+--
+set 1 disjoint set 2 check: True
+set 1 disjoint set 3 check: False
+```
+
+### Set Operators as Methods
+```
+# Union
+a = set('abracadabra')
+b = set('alacazam')
+
+a.union(b)
+print('Union:', a)
+
+# Intersection
+a = set('abracadabra')
+b = set('alacazam')
+
+a.intersection(b)
+print('Intersection:', a)
+
+# Difference
+a = set('abracadabra')
+b = set('alacazam')
+
+a.difference(b)
+print('Difference:', a)
+
+# Symmeteric Difference
+a = set('abracadabra')
+b = set('alacazam')
+
+a.symmetric_difference(b)
+print('Symmetric Difference:', a)
+
+# Subset
+a = set('abracadabra')
+b = set('alacazam')
+
+print('Subset:', a.issubset(b))
+
+# Superset
+a = set('abracadabra')
+b = set('alacazam')
+
+print('Superset:', a.issuperset(b))
+print('--')
+
+# There are no proper subset/superset methods
+
+# copy
+a = set('abracadabra')
+b = a.copy()
+c = a
+
+a.add('z')
+print('.copy() examples:')
+print('set a:', a)
+print('set b:', b)
+print('set c:', c)
+```
+```
+Union: {'b', 'a', 'r', 'd', 'c'}
+Intersection: {'b', 'a', 'r', 'd', 'c'}
+Difference: {'b', 'a', 'r', 'd', 'c'}
+Symmetric Difference: {'b', 'a', 'r', 'd', 'c'}
+Subset: False
+Superset: False
+--
+.copy() examples:
+set a: {'b', 'a', 'z', 'r', 'd', 'c'}
+set b: {'b', 'a', 'd', 'r', 'c'}
+set c: {'b', 'a', 'z', 'r', 'd', 'c'}
+```
+#### Assignment Operation & Updating Methods
+- This is a way to affect an original set with another and assign the result back to the original set
+```
+# Union and Update --> Update the set, adding elements from all others.
+a = set('abracadabra')
+b = set('alacazam')
+
+a |= b # same as: a.update(b)
+print('Union Update:', a)
+
+# Intersection and Update --> Update the set, keeping only elements found in it and all others.
+a = set('abracadabra')
+b = set('alacazam')
+
+a &= b # same as: a.intersection_update(b)
+print('Intersection Update:', a)
+
+# Difference and Update --> Update the set, removing elements found in others.
+a = set('abracadabra')
+b = set('alacazam')
+
+a -= b # same as: a.difference_update(b)
+print('Difference Update:', a)
+
+# Symmetric Difference and Update --> Update the set, keeping only elements found in either set, but not in both.
+a = set('abracadabra')
+b = set('alacazam')
+
+a ^= b # same as: a.symmetric_difference_update(b)
+print('Symmeteric Difference Update:', a)
+```
+```
+Union Update: {'b', 'a', 'z', 'r', 'l', 'm', 'd', 'c'}
+Intersection Update: {'c', 'a'}
+Difference Update: {'b', 'r', 'd'}
+Symmeteric Difference Update: {'b', 'z', 'r', 'l', 'm', 'd'}
+```
+
+### Set Comprehension
+Much like list comprehension, sets support comprehension as well
+```
+# Set Comprehension Example
+def isPalindrome(x):
+    ''' isPalindrome() returns True if string X is a palindrome '''
+    return x == x[::-1]
+
+nums = list(range(1,10000))
+palindromic_set = {num for num in nums if isPalindrome(str(num))}
+
+print('Palindromic Numbers Set from 1 to 10000:')
+print(palindromic_set)
+```
+
+### Ending Notes on Sets for Python
+- Sets aren’t sliceable nor indexable
+- Sets cannot have sets inside them
+- Sets do not have order; nor order of insertion
+- Sets cannot guarantee that their values will be in order
+- Sets do not record a value’s position
+
+# Lesson 5: Dictionary
+## Dictionary in Python 3
+- Dictionary (Associative Array, map, symbol table) is a data type that stores a collection of (key, value) pairs, such that each possible key appears at most once in the collection
+- **Common Operations:**
+  - Adding a pair
+  - Removing a pair
+  - Modify an existing pair
+  - Lookup of a value associated with a particular key
+- Aside: This concept is an introduction to concepts similar to: hash table and search trees
+
+### Defining a Dictionary in Python 3
+- Dictionaries also use {} like sets
+  - However, their individual item format is very different
+- Each item in a dictionary be a pair of key: value
+```
+# Dictionary Example
+sammy = {
+    'username': 'sammy',
+    'online': True,
+    'followers': 42
+}
+
+# There are 3 items: each with their unique addresses and value
+# Accessing
+print('Sammy dict:', sammy)
+print('Username:', sammy['username'])
+print('Online Status:', sammy['online'])
+print('Follower Count:', sammy['followers'])
+```
+```
+Sammy dict: {'username': 'sammy', 'online': True, 'followers': 42}
+Username: sammy
+Online Status: True
+Follower Count: 42
+```
+
+### Dictionary Properties
+- Each item in a dictionary is a key, value pair
+#### Keys
+- Keys are unique address for a dictionary value’s location           
+
+**Key Properties:**
+- Must be immutable (strings, numbers, tuples, frozenset)
+- Unique; therefore, two same key values cannot exist in a single dictionary
+  - NEWEST CREATED ITEM with a duplicate KEY superceeds the previous declaration
+
+#### Values
+- Values of a dictionary within a key can be any data type
+
+#### Updating a Dictionary
+- We can modify existing values by referencing the key
+- We can add new values to a dictionary by creating a new key
+- We can overwrite a value at an existing key by referencing and recreating the value for it
+```
+# Update Example
+
+sammy = {
+    'username': 'sammy',
+    'online': True,
+    'followers': 42
+}
+
+sammy['followers'] += 10 # We are adding 10 to the value located at key: 'followers'
+sammy['verified'] = True # We added a new value at a new key: 'verified'
+sammy['username'] = 'SammySammy'
+
+print('Sammy Dict:', sammy)
+```
+```
+Sammy Dict: {'username': 'SammySammy', 'online': True, 'followers': 52, 'verified': True}
+```
+
+#### Deletion with Dictionary
+- We can delete a key hence deleting the value connected to the key
+- We can empty out the entire dictionary
+- We can delete the dictionary (uncommonly used)
+```
+# Deletion Example
+
+sammy = {
+    'username': 'sammy',
+    'online': True,
+    'followers': 42
+}
+
+del sammy['followers'] # del is a keyword used to help us to execute a removal
+print('followers key deleted:', sammy)
+
+sammy.clear() # {} is considered an empty dict
+print('emptying out a dictionary', sammy)
+print('--\n\n')
+
+del sammy
+print('Deleting sammy, should create an error when referenced again', sammy)
+```
+```
+followers key deleted: {'username': 'sammy', 'online': True}
+emptying out a dictionary {}
+--
+
+
+
+
+
+---------------------------------------------------------------------------
+
+NameError                                 Traceback (most recent call last)
+
+<ipython-input-11-d3cbe81f2de2> in <module>
+     15
+     16 del sammy
+---> 17 print('Deleting sammy, should create an error when referenced again', sammy)
+
+
+NameError: name 'sammy' is not defined
+```
+
+#### Membership
+- We can use the **in** and **not in** operators to check if a key exists in a dictionary
+```
+# Membership Example
+
+sammy = {
+    'username': 'sammy',
+    'online': True,
+    'followers': 42
+}
+
+print('Checking for key username:', 'username' in sammy)
+print('Checking if followers is not a key:', 'followers' not in sammy)
+```
+```
+Checking for key username: True
+Checking if followers is not a key: False
+```
+
+#### Built-in Functions’ Interactions w/ Dictionaries
+```
+# Built-in Function Interactions
+
+sammy = {
+    'username': 'sammy',
+    'online': True,
+    'followers': 42
+}
+
+print('Size of sammy dict:', len(sammy))
+print('Largest Key:', max(sammy))
+print('Smallest Key:', min(sammy))
+print('Dict to string:', str(sammy))
+print('Dict to list:', list(sammy))
+```
+```
+Size of sammy dict: 3
+Largest Key: username
+Smallest Key: followers
+Dict to string: {'username': 'sammy', 'online': True, 'followers': 42}
+Dict to list: ['username', 'online', 'followers']
+```
+
+#### Duplicate a Dictionary and Copy Keys Only
+```
+# Duplicate a Dictionary
+
+sammy = {
+    'username': 'sammy',
+    'online': True,
+    'followers': 42
+}
+
+sammy_copy1 = sammy.copy()
+sammy_copy2 = sammy
+
+sammy['verified'] = True
+
+print('sammy_copy1:', sammy_copy1)
+print('sammy_copy2:', sammy_copy2)
+print('--')
+
+# Duplicate keys only
+
+tammy = tammy.fromkeys(sammy) # Notice that all key's values are None ... aka empty
+
+print('tammy dict:', tammy)
+```
+```
+sammy_copy1: {'username': 'sammy', 'online': True, 'followers': 42}
+sammy_copy2: {'username': 'sammy', 'online': True, 'followers': 42, 'verified': True}
+--
+tammy dict: {'username': None, 'online': None, 'followers': None, 'verified': None}
+```
+
+### Dictionary Methods
+- To help power this awesome data structure, it has good set of methods for us to use
+- Let A and B be a dictionary
+  - A.keys() –> Returns a sequence of keys/addresses in A
+  - A.values() –> Returns a sequence of item values in A
+  - A.items() –> Returns a sequence of key,item pairs in A
+  - A.get(address) –> Returns the item value at address
+  - A.update(B) –> Extends A with the dictionary of key,value pairs of B
+```
+# Dictionary Method Examples
+
+sammy = {
+    'username': 'sammy',
+    'online': True,
+    'followers': 42
+}
+
+sammy_hidden = {
+    'pwd' : 'qwerty',
+    'location' : 'Toronto, Ontario'
+}
+
+# printing all the keys of a dict
+print('Sammy Dict Keys:', sammy.keys()) # notice how it prints
+
+sammy_keys = list(sammy.keys()) # we can listify the .keys() returned
+print('List of sammy_keys', sammy_keys)
+print('--')
+
+# printing all the values of a dict
+print('Sammy Dict Values:', sammy.values())
+print('Sammy Dict Values as a list:', list(sammy.values()))
+print('--')
+
+# printing key, value pair of a dict
+print('Sammy Dict key, value pairs:', sammy.items())
+print('Sammy Dict key, value pairs as a list:', list(sammy.items()))
+print('--')
+
+# getting a value from a dict
+print('Sammy followers value:', sammy.get('followers'))
+print('Same as:', sammy['followers'])
+print('--')
+
+# updating / extending a dictionary
+sammy.update(sammy_hidden)
+
+print('Sammy extended with its hidden values:', sammy)
+```
+```
+Sammy Dict Keys: dict_keys(['username', 'online', 'followers'])
+List of sammy_keys ['username', 'online', 'followers']
+--
+Sammy Dict Values: dict_values(['sammy', True, 42])
+Sammy Dict Values as a list: ['sammy', True, 42]
+--
+Sammy Dict key, value pairs: dict_items([('username', 'sammy'), ('online', True), ('followers', 42)])
+Sammy Dict key, value pairs as a list: [('username', 'sammy'), ('online', True), ('followers', 42)]
+--
+Sammy followers value: 42
+Same as: 42
+--
+Sammy extended with its hidden values: {'username': 'sammy', 'online': True, 'followers': 42, 'pwd': 'qwerty', 'location': 'Toronto, Ontario'}
+```
+
+### Iterating a Dictionary
+- We will be taking advantage of three iteration methods
+  - iterating the keys
+  - iterating the values
+  - iterating the key, value pairs by unpacking
+```
+# Iteration Example 1: Keys
+sammy = {
+    'username': 'sammy',
+    'online': True,
+    'followers': 42
+}
+
+for k in sammy.keys():
+    print('Current key:', k)
+print('--\n')
+
+# Iteration Example 2: Values
+
+for v in sammy.values():
+    print('Current value:', v)
+print('--\n')
+
+# Iteration Example 3: Key, Value Pair
+
+for k, v in sammy.items():
+    print('Current Key:', k)
+    print('Current Value:', v)
+    print()
+```
+```
+Current key: username
+Current key: online
+Current key: followers
+--
+
+Current value: sammy
+Current value: True
+Current value: 42
+--
+
+Current Key: username
+Current Value: sammy
+
+Current Key: online
+Current Value: True
+
+Current Key: followers
+Current Value: 42
+```
+
+### dict() Constrcutor Dictionary Comprehension
+- We can turn other data types to dictionaries
+- Also similar to lists, tuples, and sets, dictionaries also support comprehension
+- **Note:** We must specify where the keys are and where the values
+```
+# dict() Example
+
+example_data = [
+    ('one', 3),
+    ('two', 3),
+    ('three', 5)
+]
+
+data_dict = dict(example_data)
+print('data_dict:', data_dict)
+print('--')
+
+# Dictionary Comprehension
+# Goal: Take string numerals and assign them with their integer square
+# - keys : string numerals
+# - values: integer squares
+
+example_data2 = ['1', '2', '3', '4', '5']
+
+data2_dict = {x : int(x)**2 for x in example_data2}
+
+print('data2_dict:', data2_dict)
+```
+```
+data_dict: {'one': 3, 'two': 3, 'three': 5}
+--
+data2_dict: {'1': 1, '2': 4, '3': 9, '4': 16, '5': 25}
+```
