@@ -1,5 +1,7 @@
 # Data Structures Complexity and Algorithms
-Notes for Unit: 03 - Algorithms & Data Structures      
+Notes for Unit: 03 - Algorithms & Data Structures.      
+
+Lesson Link: [https://mrparkonline.github.io/courses/datastruct/](url)
 
 **Data Structures:** The Data Structures course focuses on expanding our basic python skills and learning how to represent data better. These skills are crucial for all programmers as they make their leap from beginner to intermediate programmers.
 
