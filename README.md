@@ -142,5 +142,103 @@ Vec as a single list of values: [1, 2, 3, 4, 5, 6, 7, 8, 9]
 - **With list comprehension, the order of your for clauses matter!**
 
 # Lesson 2: Map & Filter
+## Map & Filter In Python 3
+Note: The two functions that we learn will also be revisited when we do functional programming and lambda functions
 
+### The Map Function
+The idea of a map function is to apply a function to an iterable data
+```
+Formatting:
 
+map(function_name, sequence)
+
+-- function_name: any function (built-in or selfmade) that returns a desired value of choice
+-- sequence: any iterable data type
+```
+```
+# Example
+def square(num):
+    ''' squares the given num argument '''
+    return num ** 2
+# end of square
+
+array = list(range(1,11))
+square_array = list(map(square, array))
+
+print('Original Array:', array)
+print('Array Squared:', square_array)
+```
+Original Array: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]        
+Array Squared: [1, 4, 9, 16, 25, 36, 49, 64, 81, 100]
+
+NOTE: the map function doesn’t return a specific data type, but rather, an python iterable data
+  - Therefore, after we apply the map function, we just execute a list function on it
+
+```
+# Example 2
+
+def upper(x):
+    ''' upper() turns string x into its uppercased counter part '''
+    return x.upper()
+
+word = 'hello world!'
+upper_word = ''.join(list(map(upper, word)))
+
+print(word)
+print(upper_word)
+
+# simpler way:
+print(word.upper())
+```
+hello world!       
+HELLO WORLD!         
+HELLO WORLD!
+
+**Example 2 Explaination:**
+- In example 2, we are doing a lot of unnecessary work to make our original word variable uppercased
+  - This is an example of how you shouldn’t use map() for every little changes you want to a string
+- It also applies to all data structure that has methods
+  - Don’t want to use methods with map since there is a high probablity that there is already method for what you might want to do
+
+## Filter Function
+The idea of the filter function is to filter out items from a data set that meets a certain condition
+
+```
+Formatting:
+
+filter(bool_returning_function, sequence)
+
+-- function: The function name we provide for filter() must be return a boolean value ... should also be able handle 
+the items inside the sequence as its arguments
+-- sequence: any iterable data type
+```
+```
+# Example 3
+
+def isOdd(x):
+    ''' isOdd() returns True if x is odd.'''
+    return x % 2 != 0
+
+array = list(range(1,101))
+odds = list(filter(isOdd, array))
+
+print('Odd Numbers from 1 to 100:', odds)
+```
+Odd Numbers from 1 to 100: [1, 3, 5, 7, 9, 11, 13, 15, 17, 19, 21, 23, 25, 27, 29, 31, 33, 35, 37, 39, 41, 43, 45, 47, 49, 51, 53, 55, 57, 59, 61, 63, 65, 67, 69, 71, 73, 75, 77, 79, 81, 83, 85, 87, 89, 91, 93, 95, 97, 99]
+
+It is true that this can be done differently, but this was a simplistic use of filter to show we can filter out variables that satisfies condition… aka the condition is **True**.
+
+## Example Problem: List of Palindromic Numbers
+Our goal in this example program is to create a list of palindromic numbers (numbers that are palindromes) from 1 to 10,000.
+```
+# Palindromic Numbers from 1 to 10000
+
+def isPalindrome(x):
+    ''' isPalindrome returns True if string X is a palindrome.'''
+    return x == x[::-1]
+
+array = list(range(1,10000))
+
+palindromic_numbers = list(map(int, filter(isPalindrome, map(str, array))))
+print('Palindromic Numbers from 1 to 10,000', palindromicNumbers)
+```
