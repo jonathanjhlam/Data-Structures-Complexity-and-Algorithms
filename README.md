@@ -138,3 +138,5 @@ Vec as a single list of values: [1, 2, 3, 4, 5, 6, 7, 8, 9]
         therefore, for row in vec
   - 3. Finally we construct our last for clause to denote that value comes from the row
 - **With list comprehension, the order of your for clauses matter!**
+
+# Lesson 2: Map & Filter
