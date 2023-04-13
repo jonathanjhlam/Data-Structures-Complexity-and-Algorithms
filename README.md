@@ -1,8 +1,16 @@
 # Data Structures Complexity and Algorithms
-Notes for Unit: 03 - Algorithms & Data Structures.      
+Notes for Unit: 03 - Algorithms & Data Structures      
 
-**Lesson Link:** [https://mrparkonline.github.io/courses/datastruct/](url)
+**Lesson Link:** [https://mrparkonline.github.io/courses/datastruct/](url)           
 
+**TOTAL: 5 LESSONS:**
+- Lesson 1: Matrices & List Comprehension
+- Lesson 2: Map & Filter
+- Lesson 3: Tuples
+- Lesson 4: Sets
+- Lesson 5: Dictionary
+
+--------------------------------------------
 **Data Structures:** The Data Structures course focuses on expanding our basic python skills and learning how to represent data better. These skills are crucial for all programmers as they make their leap from beginner to intermediate programmers.
 
 # Lesson 1: Matrices & List Comprehension
